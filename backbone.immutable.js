@@ -11,7 +11,12 @@ Backbone.Immutable = (function (Backbone, _) {
       if (_.isUndefined(attrs[key])) {
         attrs[key] = value;
       } else {
-        throw new Error("You're not supposed to change the values.");
+        var msg = "You're not supposed to change the values.";
+        if ('warn' in console) {
+          console.warn(msg);
+        } else {
+          console.log(msg);
+        }
         return false;
       }
     };
