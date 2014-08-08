@@ -49,7 +49,7 @@ describe('Backbone Immutable::Create a new collection', function  () {
         plan: 'Free'
       });
     });
-    it('fetch settings via a API call', function() {
+    it('fetch settings via an API call', function() {
       immutable.fetch();
       expect(jasmine.Ajax.requests.mostRecent().url).toBe('http://example.com/api/v1/settings');
       jasmine.Ajax.requests.mostRecent().response({
