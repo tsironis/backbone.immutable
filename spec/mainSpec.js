@@ -2,12 +2,15 @@ window.console = {};console.log = function () {};
 
 describe('Backbone Immutable::Create a new collection', function  () {
   beforeEach(function () {
-    immutable = new Backbone.Immutable({
+    Settings = Backbone.Immutable.extend({
+      url: "http://example.com/api/v1/settings"
+    });
+    immutable = new Settings({
       name: 'Dimitris',
       age: 22,
       plan: 'Free'
     });
-      jasmine.Ajax.install();
+    jasmine.Ajax.install();
   });
   afterEach(function () {
     jasmine.Ajax.uninstall();
@@ -45,6 +48,25 @@ describe('Backbone Immutable::Create a new collection', function  () {
         age: 22,
         plan: 'Free'
       });
+    });
+    it('fetch settings via a API call', function() {
+      immutable.fetch();
+      expect(jasmine.Ajax.requests.mostRecent().url).toBe('http://example.com/api/v1/settings');
+      jasmine.Ajax.requests.mostRecent().response({
+        "status": 200,
+        "contentType": 'text/plain',
+        "responseText": JSON.stringify({
+          hasFeature1: true,
+          hasFeature2: false,
+          hasFeature3: 'Premium'
+        })
+      });
+      expect(immutable.get('name')).toBe('Dimitris');
+      expect(immutable.get('age')).toEqual(22);
+      expect(immutable.get('plan')).toEqual('Free');
+      expect(immutable.get('hasFeature1')).toBe(true);
+      expect(immutable.get('hasFeature2')).toBe(false);
+      expect(immutable.get('hasFeature3')).toBe('Premium');
     });
   });
 });
