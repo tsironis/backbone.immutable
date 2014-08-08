@@ -7,6 +7,10 @@ describe('Backbone Immutable::Create a new collection', function  () {
       age: 22,
       plan: 'Free'
     });
+      jasmine.Ajax.install();
+  });
+  afterEach(function () {
+    jasmine.Ajax.uninstall();
   });
   describe('should create a new model', function() {
     it('which has correct functions and definitions', function() {

@@ -37,10 +37,14 @@ module.exports = function(grunt) {
     jasmine: {
       src: 'backbone.immutable.js',
       options: {
-        specs:  'specs/mainSpecs.js',
-        helpers: [
+        specs:  'spec/mainSpec.js',
+        vendor: [
+          'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
           'bower_components/underscore/underscore.js',
           'bower_components/backbone/backbone.js'
+        ],
+        helpers: [
+          'spec/lib/mock-ajax.js'
         ],
         keepRunner: true
       }
@@ -63,7 +67,7 @@ module.exports = function(grunt) {
       js: {
         files: [
           'backbone.immutable.js',
-          'specs/**/*.js'
+          'spec/**/*.js'
         ],
         tasks: ['specs']
       }
