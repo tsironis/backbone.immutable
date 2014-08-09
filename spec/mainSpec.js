@@ -38,9 +38,9 @@ describe('Backbone Immutable::Create a new collection', function  () {
       immutable.set('email', 'example@example.com');
       expect(immutable.get('email')).toBe('example@example.com');
     });
-    it('return false when an attribute already exists ', function() {
+    it('return undefined when an attribute already exists ', function() {
       var response = immutable.set('name', 'John');
-      expect(response).toBe(false);
+      expect(response).toBeUndefined();
     });
     it('export all attributes into a dictionary', function() {
       expect(immutable.toJSON()).toEqual({
